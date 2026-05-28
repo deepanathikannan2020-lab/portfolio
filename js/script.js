@@ -52,6 +52,65 @@ document.getElementById('imageUpload').addEventListener('change', function(e) {
     }
 });
 
+// Certificate Upload Handler
+document.getElementById('certificateUpload').addEventListener('change', function(e) {
+    const files = Array.from(e.target.files);
+    const gallery = document.getElementById('certificatesGallery');
+    
+    // Clear placeholder if first upload
+    if (gallery.querySelector('.certificate-placeholder')) {
+        gallery.innerHTML = '';
+    }
+    
+    files.forEach(file => {
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const certificateCard = document.createElement('div');
+                certificateCard.className = 'certificate-card glass-effect fade-in-up';
+                certificateCard.innerHTML = `
+                    <img src="${event.target.result}" alt="Certificate">
+                    <div class="certificate-overlay">
+                        <div class="certificate-overlay-content">
+                            <i class="fas fa-certificate"></i>
+                            <p>Certificate</p>
+                        </div>
+                    </div>
+                    <div class="certificate-info">
+                        <h4>${file.name}</h4>
+                        <p>Added: ${new Date().toLocaleDateString()}</p>
+                    </div>
+                `;
+                gallery.appendChild(certificateCard);
+            };
+            reader.readAsDataURL(file);
+        } else if (file.type === 'application/pdf') {
+            const certificateCard = document.createElement('div');
+            certificateCard.className = 'certificate-card glass-effect fade-in-up';
+            const fileURL = URL.createObjectURL(file);
+            certificateCard.innerHTML = `
+                <div class="certificate-placeholder">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="certificate-overlay">
+                    <div class="certificate-overlay-content">
+                        <i class="fas fa-download"></i>
+                        <p>Download PDF</p>
+                    </div>
+                </div>
+                <div class="certificate-info">
+                    <h4>${file.name}</h4>
+                    <p><a href="${fileURL}" download style="color: var(--primary-color);">Download</a></p>
+                </div>
+            `;
+            gallery.appendChild(certificateCard);
+        }
+    });
+    
+    // Reset file input
+    this.value = '';
+});
+
 // Resume Upload Handler
 document.getElementById('resumeUpload').addEventListener('change', function(e) {
     const file = e.target.files[0];
