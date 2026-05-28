@@ -636,6 +636,104 @@ section {
     color: rgba(224, 224, 224, 0.8);
 }
 
+/* Certificates Section */
+.certificates {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.05), rgba(0, 212, 255, 0.05));
+}
+
+.certificates-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.certificate-card {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.certificate-card img,
+.certificate-card .certificate-placeholder {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.certificate-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+}
+
+.certificate-card .certificate-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.certificate-card:hover .certificate-overlay {
+    opacity: 1;
+}
+
+.certificate-overlay-content {
+    text-align: center;
+    color: white;
+}
+
+.certificate-overlay-content i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.certificate-overlay-content p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.certificate-placeholder {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+    border: 2px dashed var(--border-color);
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.certificate-info {
+    padding: 1.2rem;
+}
+
+.certificate-info h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+
+.certificate-info p {
+    color: rgba(224, 224, 224, 0.7);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.certificate-upload {
+    text-align: center;
+    padding: 2rem;
+}
+
 /* Projects Section */
 .projects {
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(168, 85, 247, 0.05));
@@ -987,5 +1085,9 @@ section {
         width: 200px;
         height: 200px;
         font-size: 2.5rem;
+    }
+
+    .certificates-gallery {
+        grid-template-columns: 1fr;
     }
 }
